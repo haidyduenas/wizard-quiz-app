@@ -19,7 +19,7 @@ body, h1 {
 
 .img-questions{
 	max-width: 120px;
-	width: 25%;
+	width: 30%;
 	position: absolute;
 	top:10%;
 	bottom: 0;
@@ -33,7 +33,35 @@ body, h1 {
 	opacity: 1;
 	visibility: visible;
 }
+ /*Respuestas verdaderas y falsas*/
+.checkAnswers h3 {
+	font-family: 'Pathway Gothic One', sans-serif;
+	opacity: .8;
+	filter: alpha(opacity=80);
+	font-size: 20px;
+}
 
+.checker {
+  display: inline-block;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.correct, .false {
+  background-color: #109D59;
+  width: 60px;
+  height: 30px;
+  border-radius: 50%;
+  line-height: 30px;
+  padding-left: 4px;
+  float: left;
+  margin-left: 2px;
+  margin-top: 2px;
+}
+
+.false {
+  background-color: #DC4437;
+}
 .content{
 	background-color: #fff;
 	padding: 20px 20px 90px;
