@@ -9,8 +9,8 @@ window.onload = function() {
     var quizContent = {
             "La pelicula más taquillera de Pixar?": ["El Rey Leon", "Los Increibles", "Frozen", 2],
             "Pelicula animada más premiada?": ["Buscando a Nemo", "El rey Leon", "UP", 1],
-            "La pelicula ganadora del Oscara  mejor animacion 2004?": ["Enredados", "Los Increibles", "Toy Story", 1],
-            "Largometraje con mas nominaciones al oscar?": ["Wall-E", "Monster Inc","Dory", 0],
+            "La pelicula ganadora del Oscar a la mejor animacion 2004?": ["Enredados", "Los Increibles", "Toy Story", 1],
+            "Largometraje con mas nominaciones al Oscar?": ["Wall-E", "Monster Inc","Dory", 0],
             "Record al debút más grande para un pelicula animada?": ["Bichos", "Bolt","Ratatouille",2],
         };
 
@@ -36,6 +36,7 @@ function loadAnswers(curr) {
     // las respuestas se añadirán con una función onclick
     // agarrar las respuestas
     var answers = quizContent[Object.keys(quizContent)[curr]];
+        console.log(answers);
         //vacía el campo de respuesta
     answerArea.innerHTML = "";
         //agregar todas las respuestas posibles el área de respuesta
@@ -44,6 +45,7 @@ function loadAnswers(curr) {
             createDiv.setAttribute('class','col-lg-4 col-sm-4 col-xs-12');
         var createBtn = document.createElement("button");
             createBtn.setAttribute('class','btn btn-huge');
+            createBtn.setAttribute('onclick','saveData(this)');
         var createSpanA = document.createElement("span");
             createSpanA.setAttribute('class','letter');
         var createSpanB = document.createElement("span");
@@ -54,36 +56,65 @@ function loadAnswers(curr) {
             createBtn.appendChild(text);
             createDiv.appendChild(createBtn);
             //esto añade la función onclick en la respuesta, ejecutando una función para verificar la corrección
-            createDiv.addEventListener("click", checkAnswer(i, answers));
+            createDiv.addEventListener("click", checkAnswer(i, answers,curr));
             answerArea.appendChild(createDiv);
     }
 }
 
-function checkAnswer(i, arr) {
+function checkAnswer(i, arr,curr) {
     // esta es la función que se ejecutará cuando se haga clic en una de las respuestas
     // compruebe si la respuesta dada es la misma que la respuesta correcta
     // después de esto, compruebe si es la última pregunta del cuestionario
     // si es la última pregunta, vacía la zona de respuesta y deja que el usuario sepa que terminó
     return function() {
         var userAnswer = i;
+        var coreccta= quizContent[Object.keys(quizContent)[curr]];
+            //console.log(coreccta);
         var correctAnswer = arr[arr.length - 1];
+            //console.log(correctAnswer);
+        /*
         if (userAnswer === correctAnswer) {
             addChecker(true)
         } else {
             addChecker(false)
         }
+        */
         if (current < Object.keys(quizContent).length - 1) {
             current += 1
             loadImg(current);
             loadQuestion(current);
             loadAnswers(current);
         } else {
-            questionArea.innerHTML = "Terminaste!!!"
+            loadCorrectAnserw(i,curr);
+            //questionArea.innerHTML = "Terminaste!!!"
             answerArea.innerHTML = ""
         }
     }
 }
-
+function loadCorrectAnserw(i,curr){
+    var question = Object.keys(quizContent);
+    var userAnswer = i;
+        console.log(question);
+    for ( i = 0; i < question.length - 1; i += 1) {
+        var createDiv = document.createElement("div");
+            createDiv.setAttribute('class','col-lg-12 col-sm-12 col-xs-12 preguntas');
+        var text = document.createTextNode(question[i]);
+            createDiv.appendChild(text);
+            questionArea.appendChild(createDiv);
+    }
+    var divBtn = document.createElement('div');
+        divBtn.setAttribute('class','col-lg-12 col-sm-12 col-xs-12');
+    var btnSubmit = document.createElement("button");
+        btnSubmit.setAttribute('class','btn btnDark');
+    var textBtn = document.createTextNode('Submit');
+        btnSubmit.appendChild(textBtn);
+        divBtn.appendChild(btnSubmit);
+        questionArea.appendChild(divBtn);
+}
+function saveData(e){
+    
+}
+/*
 function addChecker(bool) {
     // agrega un elemento div a la página para ver si es verdadero / falso
     var checker = document.getElementsByClassName("checker")[0];
@@ -97,8 +128,12 @@ function addChecker(bool) {
         createDiv.className += "false"
         checker.appendChild(createDiv);
     }
-}
+function loadCorrectAnserw(i, arr,curr){
 
+    }
+
+}
+*/
 //inicie el cuestionario enseguida
 loadQuestion(current);
 loadAnswers(current);
