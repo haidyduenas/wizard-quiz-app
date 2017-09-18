@@ -16,14 +16,14 @@ window.onload = function() {
 
 function loadImg(curr) {
     //variable que contiene la direccion de las imagenes
-    var imgCont = ["assets/img/car.svg","assets/img/car.svg","assets/img/truck.svg","assets/img/bus.svg","assets/img/plane.svg"];
+    var imgCont = ["assets/img/fondo.png","assets/img/sou.png","assets/img/pumba.png","assets/img/in.png","assets/img/fro.png"];
     var imgArea =document.getElementsByClassName("img-questions")[0];
     var questionimg = imgCont[curr];
         imgArea.setAttribute('src',questionimg);
 }
 
 function loadQuestion(curr) {;
-    var question = Object.keys(quizContent)[curr]
+    var question = Object.keys(quizContent)[curr];
     //eliminar todo en el área de preguntas
         questionArea.innerHTML = "";
     //agregar todas las respuestas posibles el área de respuesta
@@ -35,9 +35,9 @@ function loadAnswers(curr) {
     // debe agarrar la matriz de respuesta necesaria con la ayuda de la var actual
     // las respuestas se añadirán con una función onclick
     // agarrar las respuestas
-    var answers = quizContent[Object.keys(quizContent)[curr]]
+    var answers = quizContent[Object.keys(quizContent)[curr]];
         //vacía el campo de respuesta
-    answerArea.innerHTML = ""
+    answerArea.innerHTML = "";
         //agregar todas las respuestas posibles el área de respuesta
     for ( i = 0; i < answers.length - 1; i += 1) {
         var createDiv = document.createElement("div");
@@ -65,8 +65,8 @@ function checkAnswer(i, arr) {
     // después de esto, compruebe si es la última pregunta del cuestionario
     // si es la última pregunta, vacía la zona de respuesta y deja que el usuario sepa que terminó
     return function() {
-        var userAnswer = i,
-            correctAnswer = arr[arr.length - 1]
+        var userAnswer = i;
+        var correctAnswer = arr[arr.length - 1];
         if (userAnswer === correctAnswer) {
             addChecker(true)
         } else {
@@ -88,7 +88,7 @@ function addChecker(bool) {
     // agrega un elemento div a la página para ver si es verdadero / falso
     var checker = document.getElementsByClassName("checker")[0];
     var createDiv = document.createElement("div");
-        txt = document.createTextNode(current + 1);
+    var txt = document.createTextNode(current + 1);
         createDiv.appendChild(txt);
     if (bool) {
         createDiv.className += "correct"
